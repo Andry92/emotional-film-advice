@@ -2,6 +2,15 @@ from sklearn.feature_extraction.text import CountVectorizer
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 
+with open('tweet_topics.csv', 'r+') as tweet_file:
+    for tweet in tweet_file.readlines():
+        print(tweet)
+        with open('movie_dataset.csv', 'r+') as movie_file:
+            for movie in movie_file.readlines():
+                movie = movie.replace('\r\n', '')
+                print(movie)
+
+'''
 # Define the documents
 doc_trump = "Mr. Trump became president after winning the political election. Though he lost the support of some republican friends, Trump is friends with President Putin"
 
@@ -26,3 +35,4 @@ df = pd.DataFrame(doc_term_matrix,
 
 print(df)
 print("\ncosine_similarity\n",cosine_similarity(df, df))
+'''
