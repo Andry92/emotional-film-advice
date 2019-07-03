@@ -3,9 +3,6 @@ import string
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 import re
-import csv
-
-
 
 
 # # # TOKENIZZAZIONE # # #
@@ -49,9 +46,9 @@ ps = PorterStemmer()
 # # # ------------- # # #
 
 
-# # # PRE-PROCESSING DEL TESTO  # # #
+# # # PRE-PROCESSING   # # #
 i = 1
-with open('tweet_estratti_LeoDiCaprio.csv', 'r') as csv_file:
+with open('tweet_estratti_realDonaldTrump.csv', 'r') as csv_file:
     for line in csv_file.readlines():
         tweet = line
         #print(line)
