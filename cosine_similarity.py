@@ -15,7 +15,7 @@ with open('tweet_topics.csv', 'r+') as tweet_file:
         tweet_topic.append(tweet.replace("\n", ""))
 
 movie_topic = []
-with open('movie_dataset.csv', 'r+') as movie_file:
+with open('movie_dataset_very_small.csv', 'r+') as movie_file:
     reader = csv.reader(movie_file, delimiter=';')
     for row in reader:
         movie_topic.append(row[2])
@@ -36,8 +36,9 @@ movie10 = "american,bare chested male bondage,cia,detention,interrogation"
 '''
 #documents = [tweet_0, movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9, movie10]
 documents_def = []
+all_movie_title = []
 
-for i in range(1, len(tweet_topic)+1-19):
+for i in range(1, len(tweet_topic)+1):
     documents_def = []
     documents_def.append(tweet_topic[i-1])
     for elem in movie_topic:
@@ -67,12 +68,13 @@ for i in range(1, len(tweet_topic)+1-19):
     else:
         print("\n\nIndice trama", indice_topic_trama[0])
         movie_title = []
-        with open('movie_dataset.csv', 'r+') as movie_file:
+        with open('movie_dataset_very_small.csv', 'r+') as movie_file:
             reader = csv.reader(movie_file, delimiter=';')
             for row in reader:
                 movie_title.append(row[1])
         print("Titolo film > ", movie_title[indice_topic_trama[0][0]-1])
-
+        all_movie_title.append(movie_title[indice_topic_trama[0][0]-1])
+        print("all_movie_title: ", all_movie_title)
 
 
 
