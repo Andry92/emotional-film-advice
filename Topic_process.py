@@ -20,7 +20,7 @@ def save_topics(model, feature_names, no_top_words, username):
 def topic_process():
 
     username = input("Inserisci l'username dell'utente twitter: ")
-
+    print(username)
     try:
         miei_tweets = open('tweet_estratti_prepro_'+username+'.csv')
         no_features = 1000
@@ -49,5 +49,6 @@ def topic_process():
         display_topics(lda, tf_feature_names, no_top_words)
         save_topics(lda, tf_feature_names, no_top_words, username)
 
-    except:
-        print("L'username inserito non esistente")
+    except Exception as e:
+        print(e)
+        print("Username inserito non esistente")
