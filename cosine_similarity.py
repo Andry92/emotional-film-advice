@@ -38,6 +38,7 @@ movie10 = "american,bare chested male bondage,cia,detention,interrogation"
 documents_def = []
 all_tweetid_movie_matched = []
 all_tweettopic_movie_matched = []
+only_movie_title = []
 
 for i in range(1, len(tweet_topic)+1):
     documents_def = []
@@ -73,8 +74,8 @@ for i in range(1, len(tweet_topic)+1):
 
         all_tweetid_movie_matched.append("TWEET ID: " + str(i-1) + " MOVIE TITLE: " + movie_title[indice_topic_trama[0][0]-1])
         all_tweettopic_movie_matched.append("TWEET TOPIC: " + tweet_topic[i-1] + " MOVIE TITLE: " + movie_title[indice_topic_trama[0][0] - 1])
+        only_movie_title.append(movie_title[indice_topic_trama[0][0]-1])
 
 print("\n\nTWEET ID-FILM MATCHATI: ",all_tweetid_movie_matched ,"\n\n")
-print("TWEET TOPIC-FILM MATCHATI: ",all_tweettopic_movie_matched)
-
-
+print("TWEET TOPIC-FILM MATCHATI: ",all_tweettopic_movie_matched, "\n\n")
+print("FILM MATCHATI: ",only_movie_title)
