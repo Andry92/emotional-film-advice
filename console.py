@@ -39,6 +39,8 @@ while(True):
         t4 = Thread(target=cosine_similarity_script())
         t4.daemon = True
         t4.start()
-    elif scelta == 'Q' or scelta == 'q':
+    elif scelta == 'Q':
         print("FINE")
         exit(0)
+    else:
+        print("SCELTA ERRATA")
