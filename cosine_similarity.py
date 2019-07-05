@@ -92,5 +92,7 @@ def cosine_similarity_script():
         print("TWEET TOPIC-FILM MATCHATI: ",all_tweettopic_movie_matched, "\n\n")
         print("FILM MATCHATI: ",only_movie_title)
 
-    except:
-        print("L'username inserito non esistente")
+
+    except Exception as e:
+        print(e)
+        print("Username inserito non esistente")
