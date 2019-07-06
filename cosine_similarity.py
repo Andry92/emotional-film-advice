@@ -1,3 +1,5 @@
+from time import sleep
+
 import numpy
 
 from sklearn.feature_extraction.text import CountVectorizer
@@ -5,11 +7,13 @@ import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 import csv
 import numpy as np
+from textblob.classifiers import NaiveBayesClassifier
 
 
 def cosine_similarity_script():
     username = input("Inserisci l'username dell'utente twitter: ")
-
+    print("*** ELABORAZIONE IN CORSO...")
+    sleep(0.2)
     try:
         tweet_topic = []
         with open('tweet_topics_' + username + '.csv', 'r+') as tweet_file:
@@ -18,13 +22,27 @@ def cosine_similarity_script():
 
         movie_topic = []
         movie_title = []
+        movie_genre = []
         with open('movie_dataset_500.csv', 'r+') as movie_file:
             reader = csv.reader(movie_file, delimiter=';')
             for row in reader:
                 movie_topic.append(row[2])
                 movie_title.append(row[1])
+                movie_genre.append(row[0])
 
-        # documents_def = []
+        # Definizione del classificatore
+        with open('text_emotion_prepro.csv', "r") as infile:
+            csv_reader = csv.reader(infile, delimiter=',')
+            line_count = 0
+            data = []
+            for row in csv_reader:
+                if line_count > 0:
+                    data.append((row[0], row[1]))
+                line_count += 1
+
+        cl = NaiveBayesClassifier(data)
+        # Fine definizione del classificatore
+
         all_tweetid_movie_matched = []
         all_tweettopic_movie_matched = []
         only_movie_title = []
@@ -34,6 +52,10 @@ def cosine_similarity_script():
             documents_def.append(tweet_topic[i - 1])
             for elem in movie_topic:
                 documents_def.append(elem)
+
+            # Classificazione topic per estrarre l'emozione
+            emozione_tweet_topic = cl.classify(tweet_topic[i-1])
+
 
             count_vectorizer = CountVectorizer()
             sparse_matrix = count_vectorizer.fit_transform(documents_def)
@@ -60,6 +82,7 @@ def cosine_similarity_script():
                     lista_film.append(movie_title[indice_topic_trama[0][j] - 1])
 
                 print("TWEET TOPIC > ", tweet_topic[i - 1])
+                print("EMOZIONE ESTRATTA DAL TWEET TOPIC > ", emozione_tweet_topic)
                 print("TITOLI FILM RILEVANTI > ", lista_film)
 
                 all_tweetid_movie_matched.append(
@@ -69,9 +92,9 @@ def cosine_similarity_script():
                 only_movie_title.append(movie_title[indice_topic_trama[0][0] - 1])
 
 
-        print("\n\nTWEET ID-FILM MATCHATI: ", all_tweetid_movie_matched, "\n\n")
-        print("TWEET TOPIC-FILM MATCHATI: ", all_tweettopic_movie_matched, "\n\n")
-        print("FILM MATCHATI: ", only_movie_title)
+        print("\n\nTWEET ID - FILM TROVATI > ", all_tweetid_movie_matched, "\n\n")
+        print("TWEET TOPIC - FILM TROVATI > ", all_tweettopic_movie_matched, "\n\n")
+        print("FILM TROVATI TOTALI > ", only_movie_title)
 
 
     except Exception as e:

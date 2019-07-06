@@ -1,3 +1,4 @@
+import csv
 import string
 
 from nltk.corpus import stopwords
@@ -72,6 +73,7 @@ def preprocess_tweets():
                 with open('tweet_estratti_prepro_'+username+'.csv', 'a+', encoding='utf8') as file:
                     file.writelines(tweet_prepro)
                     file.write("\n")
+
     except Exception as e:
         print(e)
         print("Username inserito non esistente")
