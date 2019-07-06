@@ -56,7 +56,6 @@ def cosine_similarity_script():
             # Classificazione topic per estrarre l'emozione
             emozione_tweet_topic = cl.classify(tweet_topic[i-1])
 
-
             count_vectorizer = CountVectorizer()
             sparse_matrix = count_vectorizer.fit_transform(documents_def)
             doc_term_matrix = sparse_matrix.todense()
